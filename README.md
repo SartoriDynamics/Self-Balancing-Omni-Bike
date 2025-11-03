@@ -15,4 +15,4 @@ Hardware:
 <img src="/Images/bia.png" alt="bia"/>
 <img src="/Images/esquematico.png" alt="esquematico"/>
 
-[https://www.youtube.com/watch?v=WBLHfCbsgjU](https://www.youtube.com/watch?v=WBLHfCbsgjU)
+[Demonstration video](https://www.youtube.com/watch?v=WBLHfCbsgjU)
