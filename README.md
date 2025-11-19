@@ -12,8 +12,8 @@ Hardware:
 * 1 Power Bank Box Charger, DC 12V output, 3x18650 batteries
 
 
-<img src="/Images/BIAO_V1a.png" alt="BIAO" width="350">
-<img src="/Images/esquematico.png" alt="esquematico" width="350">
+<img src="/Images/BIAO_V1a.png" alt="BIAO" width="500">
+<img src="/Images/esquematico.png" alt="esquematico" width="500">
 
 [Demonstration video](https://www.youtube.com/watch?v=WBLHfCbsgjU)
 
