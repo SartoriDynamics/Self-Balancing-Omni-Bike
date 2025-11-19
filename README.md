@@ -11,13 +11,9 @@ Hardware:
 * 1 Module GY-521 MPU-6050
 * 1 Power Bank Box Charger, DC 12V output, 3x18650 batteries
 
-<p align="center">
-  <img src="/Images/BIAO_V1a.png" alt="BIAO" width="350">
-</p>
 
-<p align="center">
-  <img src="/Images/esquematico.png" alt="esquematico" width="350">
-</p>
+<img src="/Images/BIAO_V1a.png" alt="BIAO" width="350">
+<img src="/Images/esquematico.png" alt="esquematico" width="350">
 
 [Demonstration video](https://www.youtube.com/watch?v=WBLHfCbsgjU)
 
