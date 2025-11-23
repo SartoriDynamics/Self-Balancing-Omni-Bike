@@ -37,6 +37,7 @@ ESP32Encoder NIDEC2_ENC;
 // Xbox controller conection
 #include <XboxSeriesXControllerESP32_asukiaaa.hpp>
 XboxSeriesXControllerESP32_asukiaaa::Core xboxController;
+XboxSeriesXHIDReportBuilder_asukiaaa::ReportBase repo;
 
 // Kalman Filter vars
 float Q_angle = 0.001; // Angular data confidence
@@ -48,8 +49,8 @@ float P[2][2] = {{ 1, 0 }, { 0, 1 }};
 float K[2] = {0, 0};
 
 // Control vars
-//         theta        dthehta              psi                 dpsi
-float K1 = -74.8,    K2 = -4.65,      K3 = -0.736,      K4 = -2.06;
+//         theta        dthehta           psi              dpsi
+float   K1 = -70,      K2 = -4.5,         K3 = -3,         K4 = -3;
 float U = 0;
 int pwm = 0;
 float theta = 0, theta_dot = 0;            // System states
@@ -64,7 +65,7 @@ float traction = 0;
 float psidot_ref = 0;
 int marcha = 2;
 bool reset = false;
-int impulseR = 0, impulseL = 0;
+bool manobra = false;
 
 // MAIN SETUP
 void setup() { // put your setup code here, to run once:
@@ -151,21 +152,53 @@ void xbox() {
     } else {
       uint16_t joystickMax = XboxControllerNotificationParser::maxJoy;
       psidot_ref = ((float)xboxController.xboxNotif.joyRHori - 32768)/10000;
-      traction = ((float)xboxController.xboxNotif.joyLVert - 32768)/((5-marcha)*120 + 128);
+      traction = ((float)xboxController.xboxNotif.joyLVert - 32768)/((5-marcha)*70 + 128);
 
       marcha = xboxController.xboxNotif.btnRB && xboxController.xboxNotif.btnLB? 5 : marcha;
       marcha = xboxController.xboxNotif.btnX ? 3 : marcha;
       marcha = xboxController.xboxNotif.btnA ? 2 : marcha;
       marcha = xboxController.xboxNotif.btnB ? 1 : marcha;
 
-      impulseR = -xboxController.xboxNotif.trigRT/10;
-      impulseL = xboxController.xboxNotif.trigLT/10;
+      manobra = xboxController.xboxNotif.btnRS? true : manobra;
+      manobra = xboxController.xboxNotif.btnLS? false : manobra;
+
+      if (manobra){
+        psidot_ref = 32768/10000;
+        traction = 32768/((5-marcha)*70 + 128);
+      }
 
       reset = xboxController.xboxNotif.btnStart? true : reset;      
     }
 
+    if (pwm > 180) {
+      xboxVibrationRight(pwm-180);
+    } else if(pwm < -180) {
+      xboxVibrationLeft(pwm+180);
+    }
+
   }   
 }
+
+void xboxVibrationRight(float intensidade) {
+  repo.v.select.center = false;
+  repo.v.select.left = false;
+  repo.v.select.right = true;
+  repo.v.select.shake = false;
+  repo.v.power.right = intensidade;
+  repo.v.timeActive = Txbox*100;
+  xboxController.writeHIDReport(repo);
+}
+
+void xboxVibrationLeft(float intensidade) {
+  repo.v.select.center = false;
+  repo.v.select.left = true;
+  repo.v.select.right = false;
+  repo.v.select.shake = false;
+  repo.v.power.left = intensidade;
+  repo.v.timeActive = Txbox*100;
+  xboxController.writeHIDReport(repo);
+}
+
 
 // SETUP functions
 void IMUsetup(){

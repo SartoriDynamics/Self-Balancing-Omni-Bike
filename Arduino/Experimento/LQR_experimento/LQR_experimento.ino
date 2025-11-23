@@ -44,8 +44,8 @@ float P[2][2] = {{ 1, 0 }, { 0, 1 }};
 float K[2] = {0, 0};
 
 // Control vars
-//         theta        dthehta              psi                 dpsi
-float K1 = -74.8,    K2 = -4.65,      K3 = -0.736,      K4 = -2.06;
+//         theta        dthehta         psi            dpsi
+float K1 = -66,    K2 = -3.8,      K3 = -0.71,      K4 = -2.4;
 float U = 0;
 int pwm = 0;
 float theta = 0, theta_dot = 0;            // System states
@@ -104,8 +104,8 @@ void equilibra() {
       psi += psi_dot*Ts;
            
       U = K1*theta + K2*theta_dot + K3*psi + K4*psi_dot;
-      if (currentT/1000.0 > 21 && currentT/1000.0 < 21.5) disturbio = 8;
-      else disturbio = 0;
+      if (currentT/1000.0 > 21 && currentT/1000.0 < 91.5) disturbio = 5;
+      // else disturbio = 0;
       pwm = (U + disturbio)*21.3;
       if (NIDEC1_ENC.getCount() == 0) pwm += random(20)-10; // sometimes the motor stops
       MOTOR1cmd(-pwm);
@@ -134,7 +134,7 @@ void equilibra() {
       dados[count][1] = theta;
       dados[count][2] = theta_dot;
       dados[count][3] = psi;
-      dados[count][4] = F;
+      dados[count][4] = psi_dot;
       dados[count][5] = U;
       dados[count][6] = disturbio;
       if(count < DADOSMAX-1) count++;
@@ -146,7 +146,7 @@ void equilibra() {
 
 void printa(){
   currentTc = millis();
-  if ((currentTc - previousTc)/1000.0 >= Tc && currentTc/1000.0 > 60) {
+  if ((currentTc - previousTc)/1000.0 >= Tc && currentTc/1000.0 > 65) {
     previousTc = currentTc;
 
     for (int i = 0; i < DADOSMAX; i++) {

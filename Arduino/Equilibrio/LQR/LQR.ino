@@ -45,7 +45,7 @@ float K[2] = {0, 0};
 
 // Control vars
 //         theta        dthehta              psi                 dpsi
-float K1 = -74.8,    K2 = -4.65,      K3 = -0.736,      K4 = -2.06;
+float K1 = -66,    K2 = -3.8,      K3 = -0.71,      K4 = -2.4;
 float U = 0;
 int pwm = 0;
 float theta = 0, theta_dot = 0;            // System states
