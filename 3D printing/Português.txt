@@ -1,1 +1,36 @@
-adsas
+IMU_holder: Fixador da IMU
+
+Nidec_gear: Engrenagem do motor Nidec
+
+Nidec_holder: Fixador do motor Nidec
+
+Omni_holder: Fixador da roda omnidirecional
+
+back_cover: Tampa traseira do biciclo
+
+front_cover: Tampa frontal do biciclo
+
+gear_spacer: Espaçador da engrenagem
+
+left_body: Corpo esquerdo do biciclo
+
+left_fork: Garfo esquerdo do biciclo
+
+right_body: Corpo direito do biciclo
+
+right_fork: Garfo direito do biciclo
+
+support: Suporte de apoio
+
+wheel_gear: Engrenagem da roda de tração
+
+wheel_spacer: Espaçador da roda de tração
+
+
+
+
+EXTRA:
+
+wheel: Roda de tração
+
+wheel_axle: Eixo da roda de tração
