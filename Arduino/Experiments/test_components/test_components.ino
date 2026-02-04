@@ -87,7 +87,6 @@ void loop() {// put your main code here, to run repeatedly:
     NIDEC1_ENC.clearCount();
 
     if(currentT/1000 > 5) U = 5; 
-          
     pwm = U*21.25;
     MOTOR1cmd(pwm);
 
